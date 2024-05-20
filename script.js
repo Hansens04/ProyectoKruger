@@ -1,48 +1,52 @@
-// script.js
-document.addEventListener('DOMContentLoaded', function() {
-    const listingGrid = document.querySelector('.listing-grid');
+( function($) {
   
-    // Simulate fetching data from an API
-    const listings = [
-      {
-        id: 1,
-        title: 'Cozy Apartment in the Heart of the City',
-        image: 'listing1.jpg',
-        description: 'Experience the vibrant city life in this charming apartment.'
-      },
-      {
-        id: 2,
-        title: 'Beachfront Getaway with Stunning Views',
-        image: 'listing2.jpg',
-        description: 'Relax and unwind in this serene beach house.'
-      },
-      {
-        id: 3,
-        title: 'Rustic Cabin in the Woods',
-        image: 'listing3.jpg',
-        description: 'Escape the hustle and bustle in this secluded cabin.'
-      },
-      // Add more listings as needed
-    ];
-  
-    listings.forEach(function(listing) {
-      const listingItem = document.createElement('div');
-      listingItem.classList.add('listing-item');
-  
-      const img = document.createElement('img');
-      img.src = listing.image;
-      img.alt = listing.title;
-  
-      const title = document.createElement('h3');
-      title.textContent = listing.title;
-  
-      const description = document.createElement('p');
-      description.textContent = listing.description;
-  
-      listingItem.appendChild(img);
-      listingItem.appendChild(title);
-      listingItem.appendChild(description);
-  
-      listingGrid.appendChild(listingItem);
+  $(document).ready(function() {
+    
+    var s           = $('.slider'),
+        sWrapper    = s.find('.slider-wrapper'),
+        sItem       = s.find('.slide'),
+        btn         = s.find('.slider-link'),
+        sWidth      = sItem.width(),
+        sCount      = sItem.length,
+        slide_date  = s.find('.slide-date'),
+        slide_title = s.find('.slide-title'),
+        slide_text  = s.find('.slide-text'),
+        slide_more  = s.find('.slide-more'),
+        slide_image = s.find('.slide-image img'),
+        sTotalWidth = sCount * sWidth;
+    
+    sWrapper.css('width', sTotalWidth);
+    sWrapper.css('width', sTotalWidth);
+    
+    var clickCount  = 0;
+    
+    btn.on('click', function(e) {
+      e.preventDefault();
+
+      if( $(this).hasClass('next') ) {
+        
+        ( clickCount < ( sCount - 1 ) ) ? clickCount++ : clickCount = 0;
+      } else if ( $(this).hasClass('prev') ) {
+        
+        ( clickCount > 0 ) ? clickCount-- : ( clickCount = sCount - 1 );
+      }
+      TweenMax.to(sWrapper, 0.4, {x: '-' + ( sWidth * clickCount ) })
+
+
+      //CONTENT ANIMATIONS
+
+      var fromProperties = {autoAlpha:0, x:'-50', y:'-10'};
+      var toProperties = {autoAlpha:0.8, x:'0', y:'0'};
+
+      TweenLite.fromTo(slide_image, 1, {autoAlpha:0, y:'40'}, {autoAlpha:1, y:'0'});
+      TweenLite.fromTo(slide_date, 0.4, fromProperties, toProperties);
+      TweenLite.fromTo(slide_title, 0.6, fromProperties, toProperties);
+      TweenLite.fromTo(slide_text, 0.8, fromProperties, toProperties);
+      TweenLite.fromTo(slide_more, 1, fromProperties, toProperties);
+
     });
+          
   });
+})(jQuery);
+
+$('.overlay').addClass('overlay-blue');
