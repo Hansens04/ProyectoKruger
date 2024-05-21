@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login/Register</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="index.css">
 </head>
 <body>
   </div>
@@ -12,11 +12,17 @@
     <div class="form-container sign-up-container">
       <form action="#">
         <h1>Registrarse</h1>
-        <span>o utilice su correo electrónico para registrarse</span>
-        <input type="text" placeholder="Nombre" />
+        <input type="text" id="signUpfirst" placeholder="Primer Nombre"/>
+        <span>Tiene que registrar nombre</span>
+        <input type="text" id="signUplastname" placeholder="Apellido"/>
+        <span>Tiene que registrar Apellido</span>
         <input type="email" id="signUpEmail" placeholder="Correo electrónico" />
+        <span>Tiene que registrar correo</span>
+        <input type="date" id="singUpdate" placeholder="Fecha"/>
+        <span>Tiene que registrar su fecha de nacimiento</span>
         <input type="password" id="signUpPassword" placeholder="Contraseña" />
-        <button id="signUpButton">Registrarse</button>
+        <span>Tiene que registrar su contraseña</span>
+        <button id="signUpButton" onclick="ValidaRegistrarse">Registrarse</button>
       </form>
     </div>
     <div class="form-container sign-in-container">
@@ -45,6 +51,6 @@
     </div>
   </div>
 
-  <script src="app.js"></script>
+  <script src="index.js"></script>
 </body>
 </html>

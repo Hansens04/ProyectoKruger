@@ -1,92 +1,259 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<title>Store</title>
+		<link rel="stylesheet" href="home.css" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+			integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		/>
+	</head>
+	<body>
+		<header>
+      <nav>
+        <ul>
+          <a href="#">Home</a></li>
+          <a href="#">All Flats</a></li>
+          <a href="#">New flat</a></li>
+          <a href="#">Profile Update</a></li>
+        </ul>
+      </nav>
+			<div class="menu-header">
+				<button id="button-header-favorite">
+					<i class="fa-solid fa-heart"></i>
+					<span class="counter-favorite">0</span>
+				</button>
+				<button>
+					<i class="fa-solid fa-bag-shopping"></i>
+					<span class="counter-cart">0</span>
+				</button>
+			</div>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="styles2.css">
+			<div class="container-list-favorites">
+				<div class="header-favorite">
+					<h3>Mis Favoritos</h3>
+					<i class="fa-solid fa-xmark" id="btn-close"></i>
+				</div>
+				<hr />
+				<div class="list-favorites">
+					<div class="card-favorite">
+						<p class="title">Audífonos Bluetooth Pro</p>
+						<p>$150</p>
+					</div>
+				</div>
+			</div>
+		</header>
 
-</head>
+		<div class="container">
+			<h1>Tienda</h1>
 
-<body>
-  <nav>
-    <ul>
-      <li><a href="#">Inicio</a></li>
-      <li><a href="#">Trending</a></li>
-      <li><a href="#">Popular</a></li>
-      <li><a href="#">Recientes</a></li>
-    </ul>
-  </nav>
-  
-  <div class="slider">
-    <h1>Favoritos</h1>
-    <div class="slider-wrapper flex">
-      <div class="slide flex">
-        <div class="slide-image slider-link prev"><img src="https://goranvrban.com/codepen/img2.jpg">
-          <div class="overlay"></div>
-        </div>
-        <div class="slide-content">
-          <div class="slide-date">30.07.2017.</div>
-          <div class="slide-title">LOREM IPSUM DOLOR SITE MATE, AD EST ABHORREANT</div>
-          <div class="slide-text">Lorem ipsum dolor sit amet, ad est abhorreant efficiantur, vero oporteat apeirian in
-            vel. Et appareat electram appellantur est. Ei nec duis invenire. Cu mel ipsum laoreet, per rebum omittam ex.
-          </div>
-          <div class="slide-more">READ MORE</div>
-        </div>
-      </div>
-      <div class="slide flex">
-        <div class="slide-image slider-link next"><img src="https://goranvrban.com/codepen/img3.jpg">
-          <div class="overlay"></div>
-        </div>
-        <div class="slide-content">
-          <div class="slide-date">30.08.2017.</div>
-          <div class="slide-title">LOREM IPSUM DOLOR SITE MATE, AD EST ABHORREANT</div>
-          <div class="slide-text">Lorem ipsum dolor sit amet, ad est abhorreant efficiantur, vero oporteat apeirian in
-            vel. Et appareat electram appellantur est. Ei nec duis invenire. Cu mel ipsum laoreet, per rebum omittam ex.
-          </div>
-          <div class="slide-more">READ MORE</div>
-        </div>
-      </div>
-      <div class="slide flex">
-        <div class="slide-image slider-link next"><img src="https://goranvrban.com/codepen/img5.jpg">
-          <div class="overlay"></div>
-        </div>
-        <div class="slide-content">
-          <div class="slide-date">30.09.2017.</div>
-          <div class="slide-title">LOREM IPSUM DOLOR SITE MATE, AD EST ABHORREANT</div>
-          <div class="slide-text">Lorem ipsum dolor sit amet, ad est abhorreant efficiantur, vero oporteat apeirian in
-            vel. Et appareat electram appellantur est. Ei nec duis invenire. Cu mel ipsum laoreet, per rebum omittam ex.
-          </div>
-          <div class="slide-more">READ MORE</div>
-        </div>
-      </div>
-      <div class="slide flex">
-        <div class="slide-image slider-link next"><img src="https://goranvrban.com/codepen/img6.jpg">
-          <div class="overlay"></div>
-        </div>
-        <div class="slide-content">
-          <div class="slide-date">30.10.2017.</div>
-          <div class="slide-title">LOREM IPSUM DOLOR SITE MATE, AD EST ABHORREANT</div>
-          <div class="slide-text">Lorem ipsum dolor sit amet, ad est abhorreant efficiantur, vero oporteat apeirian in
-            vel. Et appareat electram appellantur est. Ei nec duis invenire. Cu mel ipsum laoreet, per rebum omittam ex.
-          </div>
-          <div class="slide-more">READ MORE</div>
-        </div>
-      </div>
-    </div>
-    <div class="arrows">
-      <a href="#" title="Previous" class="arrow slider-link prev"></a>
-      <a href="#" title="Next" class="arrow slider-link next"></a>
-    </div>
-  </div>
-  <!-- Añade jQuery -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+			<div class="container-products">
+				<div class="card-product">
+					<div class="container-img">
+						<img
+							src="https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+							alt="imagen Producto"
+						/>
+					</div>
+					<div class="content-card-product" data-product-id="1">
+						<h3>Audífonos Bluetooth Pro</h3>
+						<p>
+							Sonido de alta fidelidad, conexión inalámbrica estable.
+						</p>
+						<div class="footer-card-product">
+							<span class="price">$79.99</span>
 
-  <!-- Añade GSAP -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+							<div class="container-buttons-card">
+								<button class="favorite">
+									<i
+										class="fa-regular fa-heart"
+										id="favorite-regular"
+									></i>
+									<i
+										class="fa-solid fa-heart"
+										id="added-favorite"
+									></i>
+								</button>
+								<button class="cart">
+									<i class="fa-solid fa-bag-shopping"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="card-product">
+					<div class="container-img">
+						<img
+							src="https://images.unsplash.com/photo-1549109926-58f039549485?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+							alt="imagen Producto"
+						/>
+					</div>
+					<div class="content-card-product" data-product-id="2">
+						<h3>Cámara Seguridad Smart</h3>
+						<p>Vigilancia HD, visión nocturna, alertas móviles.</p>
+						<div class="footer-card-product">
+							<span class="price">$129.99</span>
 
-  <script src="script.js"></script>
-</body>
+							<div class="container-buttons-card">
+								<button class="favorite">
+									<i
+										class="fa-regular fa-heart"
+										id="favorite-regular"
+									></i>
+									<i
+										class="fa-solid fa-heart"
+										id="added-favorite"
+									></i>
+								</button>
+								<button class="cart">
+									<i class="fa-solid fa-bag-shopping"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="card-product">
+					<div class="container-img">
+						<img
+							src="https://images.unsplash.com/photo-1544117519-31a4b719223d?q=80&w=1504&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+							alt="imagen Producto"
+						/>
+					</div>
+					<div class="content-card-product" data-product-id="3">
+						<h3>Reloj Inteligente Active</h3>
+						<p>
+							Monitoriza salud, GPS integrado, resistente al agua.
+						</p>
+						<div class="footer-card-product">
+							<span class="price">$199.99</span>
 
+							<div class="container-buttons-card">
+								<button class="favorite">
+									<i
+										class="fa-regular fa-heart"
+										id="favorite-regular"
+									></i>
+									<i
+										class="fa-solid fa-heart"
+										id="added-favorite"
+									></i>
+								</button>
+								<button class="cart">
+									<i class="fa-solid fa-bag-shopping"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="card-product">
+					<div class="container-img">
+						<img
+							src="https://images.unsplash.com/photo-1509762774605-f07235a08f1f?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+							alt="imagen Producto"
+						/>
+					</div>
+					<div class="content-card-product" data-product-id="4">
+						<h3>Mochila Urbana Eco</h3>
+						<p>
+							Materiales reciclados, diseño moderno, amplio espacio.
+						</p>
+						<div class="footer-card-product">
+							<span class="price">$59.99</span>
+
+							<div class="container-buttons-card">
+								<button class="favorite">
+									<i
+										class="fa-regular fa-heart"
+										id="favorite-regular"
+									></i>
+									<i
+										class="fa-solid fa-heart"
+										id="added-favorite"
+									></i>
+								</button>
+								<button class="cart">
+									<i class="fa-solid fa-bag-shopping"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="card-product">
+					<div class="container-img">
+						<img
+							src="https://images.unsplash.com/photo-1531104985437-603d6490e6d4?q=80&w=1678&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+							alt="imagen Producto"
+						/>
+					</div>
+					<div class="content-card-product" data-product-id="5">
+						<h3>Bocina Portátil BeatBoom</h3>
+						<p>Sonido potente, batería duradera, conexión rápida.</p>
+						<div class="footer-card-product">
+							<span class="price">$99.99</span>
+
+							<div class="container-buttons-card">
+								<button class="favorite">
+									<i
+										class="fa-regular fa-heart"
+										id="favorite-regular"
+									></i>
+									<i
+										class="fa-solid fa-heart"
+										id="added-favorite"
+									></i>
+								</button>
+								<button class="cart">
+									<i class="fa-solid fa-bag-shopping"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="card-product">
+					<div class="container-img">
+						<img
+							src="https://images.unsplash.com/photo-1570222094114-d054a817e56b?q=80&w=1505&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+							alt="imagen Producto"
+						/>
+					</div>
+					<div class="content-card-product" data-product-id="6">
+						<h3>Batidora de Mano MixIt</h3>
+						<p>
+							Velocidades ajustables, accesorios incluidos, fácil
+							limpieza.
+						</p>
+						<div class="footer-card-product">
+							<span class="price">$49.99</span>
+
+							<div class="container-buttons-card">
+								<button class="favorite">
+									<i
+										class="fa-regular fa-heart"
+										id="favorite-regular"
+									></i>
+									<i
+										class="fa-solid fa-heart"
+										id="added-favorite"
+									></i>
+								</button>
+								<button class="cart">
+									<i class="fa-solid fa-bag-shopping"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="home.js"></script>
+	</body>
 </html>
