@@ -18,6 +18,14 @@ body {
     margin: -20px 0 50px; /* Margen negativo superior e inferior */
 }
 
+/* Formatos de imagen*/
+#imag{ 
+    margin: 20px 0 10px;
+    padding: 5px;
+    display: -webkit-inline-flex;
+
+}
+
 /* Estilos para los títulos h1 */
 h1 {
     font-weight: bold; /* Texto en negrita */
@@ -54,8 +62,8 @@ a {
 /* Estilos para los botones */
 button {
     border-radius: 20px; /* Bordes redondeados */
-    border: 1px solid #ff4b2b; /* Borde de color */
-    background-color: #ff4b2b; /* Color de fondo */
+    border: 1px solid #5793e1; /* Borde de color */
+    background-color: #4982aa; /* Color de fondo */
     color: #ffffff; /* Color del texto */
     font-size: 12px; /* Tamaño de fuente */
     font-weight: bold; /* Texto en negrita */
@@ -104,6 +112,7 @@ input {
 
 /* Estilos para el contenedor principal */
 .container {
+    
     background-color: #fff; /* Color de fondo */
     border-radius: 10px; /* Bordes redondeados */
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); /* Sombra */
@@ -112,6 +121,12 @@ input {
     width: 768px; /* Ancho */
     max-width: 100%; /* Ancho máximo */
     min-height: 480px; /* Altura mínima */
+}
+
+#ImagenLogo{
+    width: 110px; position: fixed;
+    margin: 40px 0 50px 145px;
+    
 }
 
 /* Estilos para el contenedor de formularios */
@@ -181,9 +196,9 @@ input {
 
 /* Estilos para la superposición */
 .overlay {
-    background: #ff416c; /* Color de fondo degradado */
-    background: -webkit-linear-gradient(to right, #ff4b2b, #ff416c); /* Degradado para Webkit */
-    background: linear-gradient(to right, #ff4b2b, #ff416c); /* Degradado */
+    background: #586bb9; /* Color de fondo degradado */
+    background: -webkit-linear-gradient(to right, #4662cf, #477ae0); /* Degradado para Webkit */
+    background: linear-gradient(to right, #3f64c2, #2f83c8); /* Degradado */
     background-repeat: no-repeat; /* Sin repetición */
     background-size: cover; /* Cubrir completamente */
     background-position: 0 0; /* Posición de fondo */

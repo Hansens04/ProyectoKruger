@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Store</title>
+	<link rel="stylesheet" href="allflats.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+		integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+	<nav class="cajaNav">
+		<div class="titNav">
+		  <div class="logo-container">
+			<img src="Imagen_de_WhatsApp_2024-06-10_a_las_19.34.59_27eec311-removebg-preview.png" alt="imagen logo" style="width: 100px;">
+			<div class="logo">Rentease</div>
+		  </div>
+		  <div class="toggle" onclick="alternar('menu')">Abrir</div>
+		</div>
+		<ul class="barNav cerrado" id="menu">
+		  <li><a href="home.html">Home</a></li>
+		  <li><a href="Allflats.html">All Flats</a></li>
+		  <li><a href="create_product.html">New Flats</a></li>
+		  <li><a href="update.html">Profile Update</a></li>
+		</ul>
+	  </nav>
+	<div class="filter-options">
+		<label for="product-type">Product Type:</label>
+		<select id="product-type">
+		  <option value="all">All Products</option>
+		  <option value="electronics">Electronics</option>
+		  <option value="home-appliances">Home Appliances</option>
+		  <!-- Add more options as needed -->
+		</select>
+		<label for="price-range">Price Range:</label>
+		<select id="price-range">
+		  <option value="all">All Prices</option>
+		  <option value="0-50">$0 - $50</option>
+		  <option value="50-100">$50 - $100</option>
+		  <option value="100-200">$100 - $200</option>
+		  <!-- Add more options as needed -->
+		</select>
+		<button id="filter-button">Filter</button>
+	  </div>
+
+
+	<div class="container">
+		<h1>Tienda</h1>
+
+		<div class="container-products">
+			<div class="card-product" >
+				<div class="container-img">
+					<img src="https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+						alt="imagen Producto" />
+				</div>
+				<div class="content-card-product" data-product-id="1">
+					<h3>Audífonos Bluetooth Pro</h3>
+					<p>Sonido de alta fidelidad, conexión inalámbrica estable.</p>
+					<div class="footer-card-product">
+						<span class="price">$79.99</span>
+
+						<div class="container-buttons-card">
+							<button class="favorite">
+								<i class="fa-regular fa-heart" id="favorite-regular"></i>
+								<i class="fa-solid fa-heart" id="added-favorite"></i>
+							</button>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card-product">
+				<div class="container-img">
+					<img src="https://images.unsplash.com/photo-1549109926-58f039549485?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+						alt="imagen Producto" />
+				</div>
+				<div class="content-card-product" data-product-id="2">
+					<h3>Cámara Seguridad Smart</h3>
+					<p>Vigilancia HD, visión nocturna, alertas móviles.</p>
+					<div class="footer-card-product">
+						<span class="price">$129.99</span>
+
+						<div class="container-buttons-card">
+							<button class="favorite">
+								<i class="fa-regular fa-heart" id="favorite-regular"></i>
+								<i class="fa-solid fa-heart" id="added-favorite"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card-product">
+				<div class="container-img">
+					<img src="https://images.unsplash.com/photo-1544117519-31a4b719223d?q=80&w=1504&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+						alt="imagen Producto" />
+				</div>
+				<div class="content-card-product" data-product-id="3">
+					<h3>Reloj Inteligente Active</h3>
+					<p>
+						Monitoriza salud, GPS integrado, resistente al agua.
+					</p>
+					<div class="footer-card-product">
+						<span class="price">$199.99</span>
+
+						<div class="container-buttons-card">
+							<button class="favorite">
+								<i class="fa-regular fa-heart" id="favorite-regular"></i>
+								<i class="fa-solid fa-heart" id="added-favorite"></i>
+							</button>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card-product">
+				<div class="container-img">
+					<img src="https://images.unsplash.com/photo-1509762774605-f07235a08f1f?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+						alt="imagen Producto" />
+				</div>
+				<div class="content-card-product" data-product-id="4">
+					<h3>Mochila Urbana Eco</h3>
+					<p>
+						Materiales reciclados, diseño moderno, amplio espacio.
+					</p>
+					<div class="footer-card-product">
+						<span class="price">$59.99</span>
+
+						<div class="container-buttons-card">
+							<button class="favorite">
+								<i class="fa-regular fa-heart" id="favorite-regular"></i>
+								<i class="fa-solid fa-heart" id="added-favorite"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card-product">
+				<div class="container-img">
+					<img src="https://images.unsplash.com/photo-1531104985437-603d6490e6d4?q=80&w=1678&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+						alt="imagen Producto" />
+				</div>
+				<div class="content-card-product" data-product-id="5">
+					<h3>Bocina Portátil BeatBoom</h3>
+					<p>Sonido potente, batería duradera, conexión rápida.</p>
+					<div class="footer-card-product">
+						<span class="price">$99.99</span>
+
+						<div class="container-buttons-card">
+							<button class="favorite">
+								<i class="fa-regular fa-heart" id="favorite-regular"></i>
+								<i class="fa-solid fa-heart" id="added-favorite"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card-product">
+				<div class="container-img">
+					<img src="https://images.unsplash.com/photo-1570222094114-d054a817e56b?q=80&w=1505&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+						alt="imagen Producto" />
+				</div>
+				<div class="content-card-product" data-product-id="6">
+					<h3>Batidora de Mano MixIt</h3>
+					<p>
+						Velocidades ajustables, accesorios incluidos, fácil
+						limpieza.
+					</p>
+					<div class="footer-card-product">
+						<span class="price">$49.99</span>
+
+						<div class="container-buttons-card">
+							<button class="favorite">
+								<i class="fa-regular fa-heart" id="favorite-regular"></i>
+								<i class="fa-solid fa-heart" id="added-favorite"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="allflats.js"></script>
+</body>
+
+</html>

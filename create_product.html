@@ -7,9 +7,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Department Form</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="allflats.css">
 </head>
 
 <body>
+    <nav class="cajaNav">
+		<div class="titNav">
+		  <div class="logo-container">
+			<img src="Imagen_de_WhatsApp_2024-06-10_a_las_19.34.59_27eec311-removebg-preview.png" alt="imagen logo" style="width: 100px;">
+			<div class="logo">Rentease</div>
+		  </div>
+		  <div class="toggle" onclick="alternar('menu')">Abrir</div>
+		</div>
+		<ul class="barNav cerrado" id="menu">
+		  <li><a href="home.html">Home</a></li>
+		  <li><a href="Allflats.html">All Flats</a></li>
+		  <li><a href="create_product.html">New Flats</a></li>
+		  <li><a href="update.html">Profile Update</a></li>
+		</ul>
+	  </nav>
     <new-department></new-department>
     <div class="container-products mt-10"></div>
     <button id="clearStorage" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Clear Storage</button>

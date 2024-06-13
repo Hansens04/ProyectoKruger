@@ -2,7 +2,50 @@
 const signUpButton = document.getElementById("signUp");
 const signInButton = document.getElementById("signIn");
 const container = document.getElementById("container");
+let caracteres8 = document.getElementById('span-registro');//AP
+const signUpForm = document.getElementById('signUpForm');
 
+signUpForm.addEventListener('submit', event => {
+  let claveDigi = document.getElementById('signUpPassword').value;
+  
+    // Obtiene los valores de los campos de entrada
+    var primernombre = document.getElementById("signUpfirst").value;
+    var apellido = document.getElementById("signUplastname").value;
+    var email = document.getElementById("signUpEmail").value;
+    var fechaNacimiento = document.getElementById("singUpdate").value;
+    var password = document.getElementById("signUpPassword").value;
+    let isvalidarpwd = validarPassword(claveDigi);
+    
+    // Verifica que todos los campos estén llenos
+    if (primernombre && apellido && email && fechaNacimiento && password) {
+      // Verifica si la edad es mayor o igual a 18 años
+      if (calculateAge(fechaNacimiento) >= 18) {
+
+        if (isvalidarpwd) {
+          // Guarda los datos en el localStorage
+          localStorage.setItem("email", email);
+          localStorage.setItem("password", password);
+
+          //Muestra una alerta de "Registro completado exitosamente"
+          alert("Registro completado exitosamente");
+        }
+
+      } else {
+        // Muestra una alerta de "Debes ser mayor de 18 años para registrarte"
+        alert("Debes ser mayor de 18 años para registrarte");
+      }
+    } else {
+      // Muestra una alerta de "Por favor, completa todos los campos"
+      if (!primernombre || !apellido || !email || !fechaNacimiento || !password) {
+        var errorMessage = document.getElementById("span1");
+        errorMessage.style.display = "block";
+    }
+      /*caracteres8.innerHTML = "Por favor, completa todos los campos";
+      caracteres8.removeAttribute("hidden");*/
+    }
+
+
+})
 // Agrega un event listener al botón "Sign Up" que agrega la clase "right-panel-active"
 // al elemento "container", lo cual cambia la vista a la sección de registro
 signUpButton.addEventListener("click", () => {
@@ -27,39 +70,45 @@ function calculateAge(birthdate) {
   return age;
 }
 
-// Agrega un event listener al botón "Sign Up" del formulario de registro
-document.getElementById("signUpButton").addEventListener("click", function(event) {
-  // Previene el comportamiento predeterminado del formulario
-  event.preventDefault();
 
-  // Obtiene los valores de los campos de entrada
-  var primernombre = document.getElementById("signUpfirst").value;
-  var apellido = document.getElementById("signUplastname").value;
-  var email = document.getElementById("signUpEmail").value;
-  var fechaNacimiento = document.getElementById("singUpdate").value;
-  var password = document.getElementById("signUpPassword").value;
-
-  // Verifica que todos los campos estén llenos
-  if (primernombre && apellido && email && fechaNacimiento && password) {
-    // Verifica si la edad es mayor o igual a 18 años
-    if (calculateAge(fechaNacimiento) >= 18) {
-      // Muestra una alerta de "Registro completado exitosamente"
-      alert("Registro completado exitosamente");
-      // Guarda los datos en el localStorage
-      localStorage.setItem("email", email);
-      localStorage.setItem("password", password);
-    } else {
-      // Muestra una alerta de "Debes ser mayor de 18 años para registrarte"
-      alert("Debes ser mayor de 18 años para registrarte");
-    }
-  } else {
-    // Muestra una alerta de "Por favor, completa todos los campos"
-    alert("Por favor, completa todos los campos");
+function validarPassword(claveDigi) {
+  let caracterSpecRegex = /([!@#$%^&*])/gm;
+  let numeroRegex = /([0-9])/gm;
+  let mayusculas = /([A-Z])/gm;
+  let minusculas = /([a-z])/gm;
+  let numDigitos = claveDigi.length;
+  if (!(numDigitos >= 8)) 
+  { 
+    caracteres8.innerHTML = "Clave no cumple con los caracteres solicitados"
+    caracteres8.removeAttribute("hidden");
+    return false 
   }
-});
+  else if (!regexValid(claveDigi, numeroRegex)) {
+    return false
+  } else if (!regexValid(claveDigi, caracterSpecRegex)) {
+    return false;
+  } else if (!regexValid(claveDigi, mayusculas)) {
+    return false;
+  }
+  else if (!regexValid(claveDigi, minusculas)) {
+    return false;
+  }
+  else {
+    return true
+  }
+
+};
+
+const regexValid = (input,regex ) => {
+  let resultado = regex.test(input);
+  if (!resultado){
+    caracteres8.removeAttribute("hidden");
+  }
+  return resultado;
+};
 
 // Agrega un event listener al botón "Sign In" del formulario de inicio de sesión
-document.getElementById("signInButton").addEventListener("click", function(event) {
+document.getElementById("signInButton").addEventListener("click", function (event) {
   // Previene el comportamiento predeterminado del formulario
   event.preventDefault();
   // Obtiene los valores de los campos de correo electrónico y contraseña
@@ -73,7 +122,7 @@ document.getElementById("signInButton").addEventListener("click", function(event
     // Guarda un indicador de inicio de sesión en el localStorage
     localStorage.setItem("isLoggedIn", true);
     // Redirige al usuario a la página "home.html" después de 1 segundo
-    setTimeout(function() {
+    setTimeout(function () {
       window.location.href = "/home.html";
     }, 1000);
   } else {
@@ -92,12 +141,12 @@ function showModal(modalId) {
   modal.style.display = "block";
 
   // Agrega un event listener al botón de cierre del modal
-  span.onclick = function() {
+  span.onclick = function () {
     modal.style.display = "none";
   }
 
   // Agrega un event listener al documento para cerrar el modal al hacer clic fuera de él
-  window.onclick = function(event) {
+  window.onclick = function (event) {
     if (event.target == modal) {
       modal.style.display = "none";
     }

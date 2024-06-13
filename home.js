@@ -1,136 +1,93 @@
-// Selecciona todos los botones de favoritos en la página
-const btnsFavorite = document.querySelectorAll('.favorite');
+// Selecciona el contenedor donde se mostrarán los productos favoritos
+const favoritesContainer = document.querySelector('.container-products');
 
-// Selecciona todas las tarjetas de producto en la página
-const products = document.querySelectorAll('.card-product');
+// Recupera los favoritos del localStorage, si no hay favoritos, inicializa como un array vacío
+const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
-// Selecciona el contador de favoritos en la página
-const counterFavorites = document.querySelector('.counter-favorite');
+// Función para renderizar los productos favoritos
+const renderFavorites = () => {
+  // Limpia el contenido del contenedor de productos favoritos
+  favoritesContainer.innerHTML = '';
 
-// Inicializa un array para almacenar los productos favoritos
-let favorites = [];
-
-// Función para actualizar los favoritos en el localStorage
-const updateFavoritesInLocalStorage = () => {
-  localStorage.setItem('favorites', JSON.stringify(favorites));
-};
-
-// Función para cargar los favoritos desde el localStorage
-const loadFavoritesFromLocalStorage = () => {
-  const storedFavorites = localStorage.getItem('favorites');
-  if (storedFavorites) {
-    favorites = JSON.parse(storedFavorites);
-  }
-};
-
-// Función para agregar o quitar un producto de los favoritos
-const toggleFavorite = product => {
-  // Busca el índice del producto en el array de favoritos
-  const index = favorites.findIndex(element => element.id === product.id);
-  if (index > -1) {
-    // Si el producto ya está en favoritos, lo elimina
-    favorites.splice(index, 1);
-    updateFavoritesInLocalStorage();
-  } else {
-    // Si el producto no está en favoritos, lo agrega
-    favorites.push(product);
-    updateFavoritesInLocalStorage();
-  }
-  // Actualiza el icono de favorito y el contador de favoritos
-  updateFavoriteIcon(product.id);
-  updateCounterFavorites();
-};
-
-// Función para actualizar el icono de favorito de un producto
-const updateFavoriteIcon = productId => {
-  // Selecciona la tarjeta del producto correspondiente
-  const card = document.querySelector(`.content-card-product[data-product-id="${productId}"]`);
-  const favoriteButton = card.querySelector('.favorite');
-  const favoriteActiveButton = card.querySelector('#added-favorite');
-  const favoriteRegularIcon = card.querySelector('#favorite-regular');
-  // Verifica si el producto está en favoritos
-  const isFavorite = favorites.some(favorite => favorite.id === productId);
-
-  // Actualiza las clases del icono según si el producto está en favoritos o no
-  favoriteButton.classList.toggle('favorite-active', isFavorite);
-  favoriteRegularIcon.classList.toggle('active', isFavorite);
-  favoriteActiveButton.classList.toggle('active', isFavorite);
-};
-
-// Función para actualizar el contador de favoritos
-const updateCounterFavorites = () => {
-  counterFavorites.textContent = favorites.length;
-};
-
-// Añade un evento de clic a cada botón de favorito
-btnsFavorite.forEach(button => {
-  button.addEventListener('click', e => {
-    // Encuentra la tarjeta del producto correspondiente
-    const card = e.target.closest('.content-card-product');
-    const productImage = card.parentElement.querySelector('.container-img img');
-    // Crea un objeto de producto con la información de la tarjeta
-    const product = {
-      id: card.dataset.productId,
-      title: card.querySelector('h3').textContent,
-      price: card.querySelector('.price').textContent,
-      imageUrl: productImage.src,
-    };
-    // Alterna el estado de favorito del producto
-    toggleFavorite(product);
-    updateFavoriteIcon(product.id);
-  });
-});
-
-// Carga los favoritos desde el localStorage al iniciar la página
-loadFavoritesFromLocalStorage();
-// Actualiza el contador de favoritos al iniciar la página
-updateCounterFavorites();
-
-// Selecciona el contenedor donde se mostrarán los productos
-const productsContainer = document.querySelector('.container-products');
-
-// Recupera los productos del localStorage, si no hay productos, inicializa como un array vacío
-const productsList = JSON.parse(localStorage.getItem('products')) || [];
-
-// Función para renderizar los productos
-const renderProducts = () => {
-  productsContainer.innerHTML = '';
-
-  productsList.forEach(product => {
+  // Recorre cada producto favorito y lo agrega al contenedor
+  favorites.forEach(favorite => {
+    // Crea un contenedor para la tarjeta del producto
     const productCard = document.createElement('div');
     productCard.classList.add('card-product');
 
+    // Crea un contenedor para la imagen del producto
+    const containerImg = document.createElement('div');
+    containerImg.classList.add('container-img');
+    // Crea el elemento de imagen y asigna la URL y el texto alternativo
+    const img = document.createElement('img');
+    img.src = favorite.imageUrl;
+    img.alt = 'imagen Producto';
+    // Agrega la imagen al contenedor de imagen
+    containerImg.appendChild(img);
+    // Agrega el contenedor de imagen a la tarjeta del producto
+    productCard.appendChild(containerImg);
+
+    // Crea un contenedor para el contenido de la tarjeta del producto
     const contentCardProduct = document.createElement('div');
     contentCardProduct.classList.add('content-card-product');
-    contentCardProduct.dataset.productId = product.id;
+    // Asigna el ID del producto al contenedor de contenido
+    contentCardProduct.dataset.productId = favorite.id;
 
+    // Crea el elemento de título y le asigna el título del producto
     const title = document.createElement('h3');
-    title.textContent = `${product.city}, ${product.streetName} ${product.streetNumber}`;
+    title.textContent = favorite.title;
+    // Agrega el título al contenedor de contenido
     contentCardProduct.appendChild(title);
 
+    // Crea el elemento de descripción (puedes reemplazar el texto con la descripción real)
     const description = document.createElement('p');
-    description.textContent = `
-      Area Size: ${product.areaSize} sqm
-      Has AC: ${product.hasAC ? 'Yes' : 'No'}
-      Year Built: ${product.yearBuilt}
-      Rent Price: $${product.rentPrice}
-      Date Available: ${product.dateAvailable}
-    `;
+    description.textContent = 'Descripción del producto'; // Reemplaza con la descripción real
+    // Agrega la descripción al contenedor de contenido
     contentCardProduct.appendChild(description);
 
-    const productImageContainer = document.createElement('div');
-    productImageContainer.classList.add('container-img');
+    // Crea el contenedor para el pie de la tarjeta del producto
+    const footerCardProduct = document.createElement('div');
+    footerCardProduct.classList.add('footer-card-product');
 
-    const productImage = document.createElement('img');
-    productImage.src = product.imageUrl; // Aquí se usa la imagen del producto
-    productImage.alt = `${product.city}, ${product.streetName} ${product.streetNumber}`;
-    productImageContainer.appendChild(productImage);
+    // Crea el elemento de precio y le asigna el precio del producto
+    const price = document.createElement('span');
+    price.classList.add('price');
+    price.textContent = favorite.price;
+    // Agrega el precio al pie de la tarjeta
+    footerCardProduct.appendChild(price);
 
-    productCard.appendChild(productImageContainer);
+    // Crea el contenedor para los botones de la tarjeta del producto
+    const buttonsContainer = document.createElement('div');
+    buttonsContainer.classList.add('container-buttons-card');
+
+    // Crea el botón de favorito y sus íconos (regular y activo)
+    const favoriteButton = document.createElement('button');
+    favoriteButton.classList.add('favorite');
+    const favoriteRegularIcon = document.createElement('i');
+    favoriteRegularIcon.classList.add('fa-regular', 'fa-heart', 'active');
+    favoriteRegularIcon.id = 'favorite-regular';
+    const favoriteActiveIcon = document.createElement('i');
+    favoriteActiveIcon.classList.add('fa-solid', 'fa-heart', 'active');
+    favoriteActiveIcon.id = 'added-favorite';
+    // Agrega los íconos al botón de favorito
+    favoriteButton.appendChild(favoriteRegularIcon);
+    favoriteButton.appendChild(favoriteActiveIcon);
+    // Agrega el botón de favorito al contenedor de botones
+    buttonsContainer.appendChild(favoriteButton);
+
+
+
+    // Agrega el contenedor de botones al pie de la tarjeta del producto
+    footerCardProduct.appendChild(buttonsContainer);
+    // Agrega el pie de la tarjeta al contenedor de contenido
+    contentCardProduct.appendChild(footerCardProduct);
+    // Agrega el contenedor de contenido a la tarjeta del producto
     productCard.appendChild(contentCardProduct);
-    productsContainer.appendChild(productCard);
+
+    // Agrega la tarjeta del producto al contenedor de productos favoritos
+    favoritesContainer.appendChild(productCard);
   });
 };
 
-// Renderiza los productos al cargar la página
-renderProducts();
+// Llama a la función para renderizar los productos favoritos
+renderFavorites();
