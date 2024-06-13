@@ -40,36 +40,6 @@ const toggleFavorite = product => {
   updateFavoriteIcon(product.id);
   updateCounterFavorites();
 };
-$(document).on("ready",function() {
-  // 0 = oculto, 1 = visible
-  var menuState = 0;
-  //if($(".mini-menu-options").is(":hidden")) {
-    /* Agrega un listener del evento Click a btn-select */
-    $(".btn-select").on("click",function() {
-      if(menuState === 0) {
-        $(".mini-menu-options").slideDown("slow");
-        menuState = 1;
-      } else {
-        $(".mini-menu-options").slideUp("slow");
-        menuState = 0;
-      }
-    });
-  //}
-  // Si el enlace actual (li) tiene mas de 1 hijo, es decir
-  // su enlace (a) y ademas un submenu (ul)
-  $(".mini-menu-options li").on("click", function() {
-    var numHijos = $(this).children().length;
-    if(numHijos < 2) {
-      // esconde el menu
-      $(".mini-menu-options").hide("fast");
-      // obtiene el texto del elemento elegido
-      var texto = $(this).text();
-      // y lo agrega a la barra del menu
-      $(".menu-select .menu-actual").text(texto);
-    }
-    menuState = 0; // reinicia la variable que controla el menu
-  });
-});
 
 // Función para actualizar el icono de favorito de un producto
 const updateFavoriteIcon = productId => {
@@ -115,3 +85,52 @@ btnsFavorite.forEach(button => {
 loadFavoritesFromLocalStorage();
 // Actualiza el contador de favoritos al iniciar la página
 updateCounterFavorites();
+
+// Selecciona el contenedor donde se mostrarán los productos
+const productsContainer = document.querySelector('.container-products');
+
+// Recupera los productos del localStorage, si no hay productos, inicializa como un array vacío
+const productsList = JSON.parse(localStorage.getItem('products')) || [];
+
+// Función para renderizar los productos
+const renderProducts = () => {
+  productsContainer.innerHTML = '';
+
+  productsList.forEach(product => {
+    const productCard = document.createElement('div');
+    productCard.classList.add('card-product');
+
+    const contentCardProduct = document.createElement('div');
+    contentCardProduct.classList.add('content-card-product');
+    contentCardProduct.dataset.productId = product.id;
+
+    const title = document.createElement('h3');
+    title.textContent = `${product.city}, ${product.streetName} ${product.streetNumber}`;
+    contentCardProduct.appendChild(title);
+
+    const description = document.createElement('p');
+    description.textContent = `
+      Area Size: ${product.areaSize} sqm
+      Has AC: ${product.hasAC ? 'Yes' : 'No'}
+      Year Built: ${product.yearBuilt}
+      Rent Price: $${product.rentPrice}
+      Date Available: ${product.dateAvailable}
+    `;
+    contentCardProduct.appendChild(description);
+
+    const productImageContainer = document.createElement('div');
+    productImageContainer.classList.add('container-img');
+
+    const productImage = document.createElement('img');
+    productImage.src = product.imageUrl; // Aquí se usa la imagen del producto
+    productImage.alt = `${product.city}, ${product.streetName} ${product.streetNumber}`;
+    productImageContainer.appendChild(productImage);
+
+    productCard.appendChild(productImageContainer);
+    productCard.appendChild(contentCardProduct);
+    productsContainer.appendChild(productCard);
+  });
+};
+
+// Renderiza los productos al cargar la página
+renderProducts();
