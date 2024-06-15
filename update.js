@@ -13,98 +13,107 @@ document.addEventListener('DOMContentLoaded', () => {
   const confirmPasswordError = document.getElementById('confirmPasswordError');
   const validationMessage = document.getElementById('validationMessage');
 
-  updateButton.addEventListener('click', (e) => {
-    e.preventDefault(); // Prevenir el comportamiento por defecto del botón
-    let valid = true;
-
-    // Validaciones de campos...
-    if (updateEmail.value === '') {
-      updateEmailError.style.display = 'block';
-      valid = false;
-    } else {
-      updateEmailError.style.display = 'none';
-    }
-
-    if (currentPassword.value === '') {
-      currentPasswordError.style.display = 'block';
-      valid = false;
-    } else {
-      currentPasswordError.style.display = 'none';
-    }
-
-    if (newPassword.value === '') {
-      newPasswordError.style.display = 'block';
-      valid = false;
-    } else {
-      newPasswordError.style.display = 'none';
-    }
-
-    if (confirmPassword.value !== newPassword.value) {
-      confirmPasswordError.style.display = 'block';
-      valid = false;
-    } else {
-      confirmPasswordError.style.display = 'none';
-    }
-
-    if (valid) {
-      // Obtener usuarios del localStorage
-      const users = JSON.parse(localStorage.getItem('users')) || [];
-      const storedUser = users.find(user => user.email === updateEmail.value);
-
-      if (storedUser && storedUser.password === currentPassword.value) {
-        if (validatePassword(newPassword.value)) {
-          // Actualizar la contraseña del usuario
-          storedUser.password = newPassword.value;
-          // Guardar los usuarios actualizados en localStorage
-          localStorage.setItem('users', JSON.stringify(users));
-          alert('Datos actualizados exitosamente');
-          // Limpiar los campos del formulario
-          updateForm.reset();
-        } else {
-          validationMessage.textContent = 'La nueva contraseña no cumple con los requisitos';
-          validationMessage.style.display = 'block';
-        }
-      } else {
-        alert('Correo electrónico o contraseña actual incorrectos');
+  // Función para mostrar mensajes en la consola y en la página
+  function log(message) {
+      console.log(message);
+      let logElement = document.getElementById('log');
+      if (!logElement) {
+          logElement = document.createElement('div');
+          logElement.id = 'log';
+          logElement.style.whiteSpace = 'pre-wrap';
+          document.body.appendChild(logElement);
       }
-    }
+      logElement.textContent += message + '\n';
+  }
+
+  updateButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      log('Botón de actualización clickeado');
+      
+      let valid = true;
+
+      // Reset all error messages
+      [updateEmailError, currentPasswordError, newPasswordError, confirmPasswordError, validationMessage].forEach(el => {
+          el.classList.remove('show');
+      });
+
+      if (updateEmail.value === '') {
+          updateEmailError.classList.add('show');
+          valid = false;
+      }
+
+      if (currentPassword.value === '') {
+          currentPasswordError.classList.add('show');
+          valid = false;
+      }
+
+      if (newPassword.value === '') {
+          newPasswordError.classList.add('show');
+          valid = false;
+      }
+
+      if (confirmPassword.value !== newPassword.value) {
+          confirmPasswordError.classList.add('show');
+          valid = false;
+      }
+
+      if (valid && validatePassword(newPassword.value)) {
+          log('Formulario válido, procediendo con la actualización');
+
+          // Obtener usuarios del localStorage
+          let users = JSON.parse(localStorage.getItem('users')) || [];
+
+          // Encontrar usuario por email y contraseña actual
+          let userIndex = users.findIndex(user => user.email === updateEmail.value && user.password === currentPassword.value);
+
+          if (userIndex === -1) {
+              validationMessage.textContent = 'Usuario no encontrado o contraseña actual incorrecta';
+              validationMessage.classList.add('show');
+              return;
+          }
+
+          // Actualizar la contraseña del usuario
+          users[userIndex].password = newPassword.value;
+          localStorage.setItem('users', JSON.stringify(users));
+
+          log('Contraseña actualizada exitosamente');
+      }
   });
 
   function validatePassword(password) {
-    const minLength = 8;
-    const hasUpperCase = /[A-Z]/.test(password);
-    const hasLowerCase = /[a-z]/.test(password);
-    const hasNumbers = /[0-9]/.test(password);
-    const hasSpecialChars = /[!@#\$%\^\&*\)\(+=._-]/.test(password);
-  
-    if (password.length < minLength) {
-      validationMessage.textContent = 'La contraseña debe tener al menos ' + minLength + ' caracteres';
-      validationMessage.style.display = 'block';
-      return false;
-    }
-    if (!hasUpperCase) {
-      validationMessage.textContent = 'La contraseña debe tener al menos una letra mayúscula';
-      validationMessage.style.display = 'block';
-      return false;
-    }
-    if (!hasLowerCase) {
-      validationMessage.textContent = 'La contraseña debe tener al menos una letra minúscula';
-      validationMessage.style.display = 'block';
-      return false;
-    }
-    if (!hasNumbers) {
-      validationMessage.textContent = 'La contraseña debe tener al menos un número';
-      validationMessage.style.display = 'block';
-      return false;
-    }
-    if (!hasSpecialChars) {
-      validationMessage.textContent = 'La contraseña debe tener al menos un carácter especial';
-      validationMessage.style.display = 'block';
-      return false;
-    }
-  
-    validationMessage.style.display = 'none';
-    return true;
+      const minLength = 8;
+      const hasUpperCase = /[A-Z]/.test(password);
+      const hasLowerCase = /[a-z]/.test(password);
+      const hasNumbers = /[0-9]/.test(password);
+      const hasSpecialChars = /[!@#\$%\^\&*\)\(+=._-]/.test(password);
+
+      if (password.length < minLength) {
+          validationMessage.textContent = 'La contraseña debe tener al menos ' + minLength + ' caracteres';
+          validationMessage.classList.add('show');
+          return false;
+      }
+      if (!hasUpperCase) {
+          validationMessage.textContent = 'La contraseña debe tener al menos una letra mayúscula';
+          validationMessage.classList.add('show');
+          return false;
+      }
+      if (!hasLowerCase) {
+          validationMessage.textContent = 'La contraseña debe tener al menos una letra minúscula';
+          validationMessage.classList.add('show');
+          return false;
+      }
+      if (!hasNumbers) {
+          validationMessage.textContent = 'La contraseña debe tener al menos un número';
+          validationMessage.classList.add('show');
+          return false;
+      }
+      if (!hasSpecialChars) {
+          validationMessage.textContent = 'La contraseña debe tener al menos un carácter especial';
+          validationMessage.classList.add('show');
+          return false;
+      }
+
+      validationMessage.classList.remove('show');
+      return true;
   }
 });
-

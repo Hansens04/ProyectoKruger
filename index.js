@@ -6,6 +6,7 @@ let caracteres8 = document.getElementById('span-registro');//AP
 const signUpForm = document.getElementById('signUpForm');
 
 signUpForm.addEventListener('submit', event => {
+  event.preventDefault(); // Prevenir el envío del formulario
   let claveDigi = document.getElementById('signUpPassword').value;
   
     // Obtiene los valores de los campos de entrada
@@ -22,12 +23,29 @@ signUpForm.addEventListener('submit', event => {
       if (calculateAge(fechaNacimiento) >= 18) {
 
         if (isvalidarpwd) {
-          // Guarda los datos en el localStorage
-          localStorage.setItem("email", email);
-          localStorage.setItem("password", password);
+          // Obtiene los usuarios existentes o inicializa un array vacío
+          let users = JSON.parse(localStorage.getItem("users")) || [];
+          
+          // Crea un nuevo objeto de usuario
+          let newUser = {
+            nombre: primernombre,
+            apellido: apellido,
+            email: email,
+            fechaNacimiento: fechaNacimiento,
+            password: password
+          };
+          
+          // Añade el nuevo usuario al array
+          users.push(newUser);
+          
+          // Guarda el array actualizado en localStorage
+          localStorage.setItem("users", JSON.stringify(users));
 
           //Muestra una alerta de "Registro completado exitosamente"
           alert("Registro completado exitosamente");
+          
+          // Limpia el formulario
+          signUpForm.reset();
         }
 
       } else {
@@ -40,12 +58,9 @@ signUpForm.addEventListener('submit', event => {
         var errorMessage = document.getElementById("span1");
         errorMessage.style.display = "block";
     }
-      /*caracteres8.innerHTML = "Por favor, completa todos los campos";
-      caracteres8.removeAttribute("hidden");*/
     }
+});
 
-
-})
 // Agrega un event listener al botón "Sign Up" que agrega la clase "right-panel-active"
 // al elemento "container", lo cual cambia la vista a la sección de registro
 signUpButton.addEventListener("click", () => {
@@ -69,7 +84,6 @@ function calculateAge(birthdate) {
   }
   return age;
 }
-
 
 function validarPassword(claveDigi) {
   let caracterSpecRegex = /([!@#$%^&*])/gm;
@@ -96,7 +110,6 @@ function validarPassword(claveDigi) {
   else {
     return true
   }
-
 };
 
 const regexValid = (input,regex ) => {
@@ -109,24 +122,24 @@ const regexValid = (input,regex ) => {
 
 // Agrega un event listener al botón "Sign In" del formulario de inicio de sesión
 document.getElementById("signInButton").addEventListener("click", function (event) {
-  // Previene el comportamiento predeterminado del formulario
   event.preventDefault();
-  // Obtiene los valores de los campos de correo electrónico y contraseña
   var email = document.getElementById("email").value;
   var password = document.getElementById("password").value;
 
-  // Verifica que los valores ingresados coincidan con los almacenados en el localStorage
-  if (localStorage.getItem("email") === email && localStorage.getItem("password") === password) {
-    // Muestra una alerta de "Inicio de sesión exitoso"
+  // Obtiene la lista de usuarios
+  let users = JSON.parse(localStorage.getItem("users")) || [];
+
+  // Busca un usuario que coincida con el email y la contraseña
+  let user = users.find(u => u.email === email && u.password === password);
+
+  if (user) {
     alert("Inicio de sesión exitoso");
-    // Guarda un indicador de inicio de sesión en el localStorage
     localStorage.setItem("isLoggedIn", true);
-    // Redirige al usuario a la página "home.html" después de 1 segundo
+    localStorage.setItem("currentUser", JSON.stringify(user));
     setTimeout(function () {
       window.location.href = "/home.html";
     }, 1000);
   } else {
-    // Muestra una alerta de "Correo electrónico o contraseña incorrectos"
     alert("Correo electrónico o contraseña incorrectos. Por favor, inténtalo de nuevo.");
   }
 });
