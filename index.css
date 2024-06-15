@@ -96,7 +96,7 @@ form {
     align-items: center; /* Centra verticalmente */
     justify-content: center; /* Centra horizontalmente */
     flex-direction: column; /* Apila en columna */
-    padding: 0 50px; /* Relleno lateral */
+    padding: 0 50px 80px; /* Relleno lateral */
     height: 100%; /* Altura completa */
     text-align: center; /* Texto centrado */
 }

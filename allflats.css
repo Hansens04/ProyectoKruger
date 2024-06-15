@@ -52,6 +52,11 @@ body {
    align-items: center;
 }
 
+.cajaNav .logo-container .logo-image {
+   width: 40px; /* Ajusta el tamaño de la imagen del logo */
+   height: auto;
+}
+
 .cajaNav .logo-container .logo {
    margin-left: 10px;
 }
@@ -301,19 +306,9 @@ body {
 /*            FAVORITE ICONS           */
 /* ----------------------------------- */
 
-#added-favorite {
-    color: red;
-    display: none;
-}
-
 #favorite-regular.active {
-    background-color: red;
-    display: none;
-}
-
-#added-favorite.active {
-    display: block;
-    color: red;
+    color: red; /* Cambia el color del ícono a blanco cuando está activo */
+     /* Cambia el color de fondo del botón a rojo cuando está activo */ /* Añade un borde rojo al botón cuando está activo */
 }
 
 /* Mobile styles */
