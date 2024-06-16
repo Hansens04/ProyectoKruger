@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const productsContainer = document.querySelector('.container-products');
+  const cityFilter = document.getElementById('city-filter');
+  const priceFilter = document.getElementById('price-filter');
 
   const products = [
     { id: "1", imageUrl: "https://images.unsplash.com/photo-1603003568133-55b07aaf1860?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", province: "Pichincha-Ecuador", city: "Quito", description: "Renta Apartamento de 250 m² a Super Buen Precio en Miravalle 4", street: "Calle numero 28c", year: "Año de construccion: 2007", price: "$1500" },
@@ -12,10 +14,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
-  const showHTML = () => {
+  const showHTML = (filteredProducts) => {
     productsContainer.innerHTML = '';
 
-    products.forEach(product => {
+    filteredProducts.forEach(product => {
       const isFavorite = favorites.some(favorite => favorite.id === product.id);
 
       const productCard = `
@@ -59,10 +61,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
         localStorage.setItem('favorites', JSON.stringify(favorites));
 
-        showHTML();
+        showHTML(filteredProducts);
       });
     });
   };
 
-  showHTML();
+  const filterProducts = () => {
+    const selectedCity = cityFilter.value;
+    const selectedPrice = parseInt(priceFilter.value);
+
+    const filteredProducts = products.filter(product => {
+      const productPrice = parseInt(product.price.replace('$', ''));
+      return (selectedCity === '' || product.city === selectedCity) &&
+             (isNaN(selectedPrice) || productPrice <= selectedPrice);
+    });
+
+    showHTML(filteredProducts);
+  };
+
+  cityFilter.addEventListener('change', filterProducts);
+  priceFilter.addEventListener('input', filterProducts);
+
+  // Inicializar la lista de ciudades
+  const cities = [...new Set(products.map(product => product.city))];
+  cities.forEach(city => {
+    const option = document.createElement('option');
+    option.value = city;
+    option.textContent = city;
+    cityFilter.appendChild(option);
+  });
+
+  showHTML(products);
 });

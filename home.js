@@ -126,6 +126,44 @@ const removeFavorite = (event) => {
   // Re-renderizar los favoritos
   renderFavorites();
 };
+document.addEventListener('DOMContentLoaded', () => {
+        const productsContainer = document.querySelector('.container-products');
+
+        const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+        const showHTML = () => {
+          productsContainer.innerHTML = '';
+
+          favorites.forEach(product => {
+            const productCard = `
+              <div class="card-product">
+                <div class="container-img">
+                  <img src="${product.imageUrl}" alt="imagen Producto" />
+                </div>
+                <div class="content-card-product" data-product-id="${product.id}">
+                  <h3>${product.province}</h3>
+                  <h4>${product.city}</h4>
+                  <p>${product.description}</p>
+                  <p>${product.street}</p>
+                  <p>${product.year}</p>
+                  <div class="footer-card-product">
+                    <span class="price">${product.price}</span>
+                    <div class="container-buttons-card">
+                      <button class="favorite">
+                        <i class="fa-regular fa-heart" id="favorite-regular"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            `;
+
+            productsContainer.innerHTML += productCard;
+          });
+        };
+
+        showHTML();
+      });
 
 // Llama a la función para renderizar los favoritos
 renderFavorites();

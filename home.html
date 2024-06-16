@@ -1,79 +1,79 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Favoritos</title>
-    <link rel="stylesheet" href="allflats.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-  </head>
-  <body>
-    <nav class="cajaNav">
-      <div class="titNav">
-        <div class="logo-container">
-          <img src="Imagen_de_WhatsApp_2024-06-10_a_las_19.34.59_27eec311-removebg-preview.png" alt="imagen logo" style="width: 100px;">
-          <div class="logo">Rentease</div>
-        </div>
-        <div class="toggle" onclick="alternar('menu')">Abrir</div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Favoritos</title>
+  <link rel="stylesheet" href="allflats.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+</head>
+<body>
+  <nav class="cajaNav">
+    <div class="titNav">
+      <div class="logo-container">
+        <img src="Imagen_de_WhatsApp_2024-06-10_a_las_19.34.59_27eec311-removebg-preview.png" alt="imagen logo" style="width: 100px;">
+        <div class="logo">Rentease</div>
       </div>
-      <ul class="barNav cerrado" id="menu">
-        <li><a href="home.html">Home</a></li>
-        <li><a href="Allflats.html">All Flats</a></li>
-        <li><a href="create_product.html">New Flats</a></li>
-        <li><a href="update.html">Profile Update</a></li>
-      </ul>
-    </nav>
-
-    <div class="container">
-      <h1>Mis Favoritos</h1>
-      <div class="container-products"></div>
+      <div class="toggle" onclick="alternar('menu')">Abrir</div>
     </div>
+    <ul class="barNav cerrado" id="menu">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="Allflats.html">All Flats</a></li>
+      <li><a href="create_product.html">New Flats</a></li>
+      <li><a href="update.html">Profile Update</a></li>
+    </ul>
+  </nav>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const productsContainer = document.querySelector('.container-products');
+  <div class="container">
+    <h1>Mis Favoritos</h1>
+    <div class="container-products"></div>
+  </div>
 
-        const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const productsContainer = document.querySelector('.container-products');
+      const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
-        const showHTML = () => {
-          productsContainer.innerHTML = '';
+      const showHTML = () => {
+        productsContainer.innerHTML = '';
 
-          favorites.forEach(product => {
-            const productCard = `
-              <div class="card-product">
-                <div class="container-img">
-                  <img src="${product.imageUrl}" alt="imagen Producto" />
-                </div>
-                <div class="content-card-product" data-product-id="${product.id}">
-                  <h3>${product.province}</h3>
-                  <h4>${product.city}</h4>
-                  <p>${product.description}</p>
-                  <p>${product.street}</p>
-                  <p>${product.year}</p>
-                  <div class="footer-card-product">
-                    <span class="price">${product.price}</span>
-                    <div class="container-buttons-card">
-                      <button class="favorite">
-                        <i class="fa-regular fa-heart" id="favorite-regular"></i>
-                      </button>
-                    </div>
+        favorites.forEach(product => {
+          const productCard = `
+            <div class="card-product">
+              <div class="container-img">
+                <img src="${product.imageUrl}" alt="imagen Producto" />
+              </div>
+              <div class="content-card-product" data-product-id="${product.id}">
+                <h3>${product.province}</h3>
+                <h4>${product.city}</h4>
+                <p>${product.description}</p>
+                <p>${product.street}</p>
+                <p>${product.year}</p>
+                <div class="footer-card-product">
+                  <span class="price">${product.price}</span>
+                  <div class="container-buttons-card">
+                    <button class="favorite">
+                      <i class="fa-regular fa-heart" id="favorite-regular"></i>
+                    </button>
                   </div>
                 </div>
               </div>
-            `;
+            </div>
+          `;
+          productsContainer.innerHTML += productCard;
+        });
+      };
 
-            productsContainer.innerHTML += productCard;
-          });
-        };
-
-        showHTML();
-      });
-    </script>
-  </body>
+      showHTML();
+    });
+  </script>
+  <script src="prueba.js"></script>
+</body>
 </html>
