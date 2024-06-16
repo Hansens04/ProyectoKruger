@@ -1,5 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&display=swap');
 
+/* CSS Variables */
+:root {
+    /* Colors */
+    --color-white: #fff;
+    --color-black: #000;
+    --color-grey: #ccc;
+    --color-red: #f00;
+    --color-dark-red: #d00;
+    --color-background: #1b0202;
+    
+    /* Typography */
+    --font-family: 'Quicksand', sans-serif;
+    --font-size-base: 16px;
+    --font-size-large: 18px;
+    --font-size-small: 14px;
+    
+    /* Spacing */
+    --spacing-xs: 5px;
+    --spacing-sm: 10px;
+    --spacing-md: 15px;
+    --spacing-lg: 20px;
+    
+    /* Other */
+    --border-radius: 5px;
+    --transition-speed: 0.3s;
+}
+
 /* Reset general */
 * {
     margin: 0;
@@ -7,171 +34,159 @@
     box-sizing: border-box;
 }
 
-body,
-html {
-    font-family: 'Quicksand', sans-serif;
-    font-size: 16px;
+body, html {
+    font-family: var(--font-family);
+    font-size: var(--font-size-base);
     height: 100%;
+    line-height: 1.6;
+    color: var(--color-black);
+    background-color: var(--color-white);
 }
 
-/* Estilos de navegación */
-:root{
-    --color:white;
-    --fnd : #1b0202;
-    --fndRsp: white;
-    --colorRsp: black;
-}
-.cajaNav{
-    font-family: sans-serif;
-    display:flex;
+/* Navigation Styles */
+.cajaNav {
+    display: flex;
     justify-content: space-between;
-    background:var(--fnd);
-    color: var(--color);
-}
-.cajaNav .barNav{
-    margin:0 10px 0 0;
-}
-.cajaNav .titNav{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex: 1;
-    background:var(--fnd);
-    color:var(--color);
-    height:auto;
-} 
-.cajaNav .titNav .toggle{
-    display:none;
-}
-.cajaNav .titNav .logo{
-    margin: 10px 10px;
-}
-.cajaNav .barNav {
-    display:flex;
-    list-style:none;
-    align-items: center;
-    padding:0;
-}
-.cajaNav .barNav li{
-    display:flex;
-    align-items:center;
-    padding: 0 20px ;
-    height:100%; 
-}
-.cajaNav .barNav li:hover{
-    background: var(--color);
-    color:var(--fnd);
-    cursor: pointer;
-}
-.cajaNav .barNav li a{
-    text-decoration: none;
-    cursor: pointer;
-    color:inherit;
+    background: var(--color-background);
+    color: var(--color-white);
+    padding: var(--spacing-sm) var(--spacing-md);
 }
 
-/* Contenedor principal */
+.cajaNav .barNav,
+.cajaNav .titNav {
+    display: flex;
+    align-items: center;
+}
+
+.cajaNav .titNav {
+    flex: 1;
+    font-size: var(--font-size-large);
+    font-weight: 700;
+}
+
+.cajaNav .barNav {
+    list-style-type: none;
+}
+
+.cajaNav .barNav li,
+.cajaNav .barNav li a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+.cajaNav .barNav li {
+    padding: var(--spacing-sm) var(--spacing-md);
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+.cajaNav .barNav li:hover {
+    background-color: var(--color-white);
+    color: var(--color-background);
+}
+
+/* Main Container */
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 15px;
+    padding: var(--spacing-md);
 }
 
-/* Formulario */
+/* Form Styles */
 #updateForm {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    max-width: 500px;
-    margin-bottom: 20px;
-}
-
-#updateForm label {
-    font-weight: bold;
+    gap: var(--spacing-md);
+    max-width: 600px;
+    margin: var(--spacing-lg) auto;
 }
 
 #updateForm input,
-#updateForm textarea {
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+#updateForm textarea,
+#updateForm button[type="submit"] {
+    padding: var(--spacing-sm);
+    border: 1px solid var(--color-grey);
+    border-radius: var(--border-radius);
+    font-family: inherit;
+    font-size: var(--font-size-base);
 }
 
 #updateForm button[type="submit"] {
-    padding: 10px;
-    border: none;
-    background-color: #000;
-    color: #fff;
+    background-color: var(--color-black);
+    color: var(--color-white);
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color var(--transition-speed);
 }
 
 #updateForm button[type="submit"]:hover {
-    background-color: #333;
+    background-color: var(--color-dark-red);
 }
 
-/* Contenedor de productos */
+/* Product Container */
 .container-products {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
 }
 
-/* Tarjeta de producto */
+/* Product Card */
 .card-product {
-    background-color: #fff;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--color-grey);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    transition: box-shadow var(--transition-speed);
 }
 
-.card-product h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
+.card-product:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.card-product p {
-    font-size: 16px;
-    line-height: 1.5;
-    color: #555;
-}
-
-.container-img {
-    height: 150px; /* Altura deseada */
-    width: 100%; /* Ancho máximo para que se ajuste al contenedor */
-    border-radius: 12px;
-    overflow: hidden;
-}
-
-.container-img img {
-    width: 100%; /* Hace que la imagen ocupe todo el ancho del contenedor */
-    height: auto; /* Mantiene la proporción de la imagen */
-    object-fit: cover; /* Escala la imagen para que cubra todo el contenedor sin distorsionarse */
-}
-
-/* Botón de borrar datos */
+/* Clear Storage Button */
 #clearStorage {
-    padding: 10px 20px;
+    display: block;
+    margin: var(--spacing-lg) auto;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background-color: var(--color-red);
+    color: var(--color-white);
     border: none;
-    background-color: #f00;
-    color: #fff;
+    border-radius: var(--border-radius);
     cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+    transition: background-color var(--transition-speed);
 }
 
 #clearStorage:hover {
-    background-color: #d00;
+    background-color: var(--color-dark-red);
 }
-/* ----------------------------------- */
-/*              HEADER                 */
-/* ----------------------------------- */
 
-.cajaNav .logo-container {
-    display: flex;
-    align-items: center;
- }
- 
- .cajaNav .logo-container .logo {
-    margin-left: 10px;
- }
- 
+/* Responsive Design */
+@media (max-width: 768px) {
+    :root {
+        --font-size-large: 16px;
+        --font-size-base: 14px;
+        --font-size-small: 12px;
+    }
+
+    .cajaNav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .cajaNav .titNav {
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .cajaNav .barNav {
+        width: 100%;
+        justify-content: space-around;
+    }
+
+    .cajaNav .barNav li {
+        padding: var(--spacing-xs) var(--spacing-sm);
+    }
+
+    .container-products {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
